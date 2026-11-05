@@ -16,3 +16,28 @@ Core thesis:
 1. Eco-Tokens — token-budget guard ($1.25/$4.25 per 1M target) 
 
 2. Lean <24h Factory — RECEIVE→READ→THINK→ACT→OBSERVE→EVALUATE loop 3. Marathon Hand-Off — Wonder delegates to sub-agents, recovers, runs uninterrupted
+
+# ECO-Muse Forge: The <24h Lean Agent Factory
+
+> The first eco-tokens, human-governed intelligence orchestration experiment that reveals the secret recipe for the next generation of Meta AI agents.
+
+ECO-Muse Forge is not just an agent — it's a **factory that builds agents**. It introduces a new lean-production paradigm: from idea to feature-rich, cloud-managed product agent in less than 24 hours.
+
+Built for the **Meta Global AI Developer Hackathon**, running entirely on the **Meta Model API**.
+
+## Why This Matters
+
+**Old way:** Weeks to build agents, 100k+ tokens burned, black-box decisions.
+**New way:** HULLM-BB-008 orchestration on Muse Spark + Wonder + Code with 60%+ eco-token reduction.
+
+## Core Demo: Evidence-Gated Business Navigator (HULLM-BB-008)
+
+**Research Question:** Does HULLM add measurable value around an existing model?
+
+We run head-to-head:
+- **Baseline:** Direct Muse Spark call
+- **HULLM:** Governed workflow with SOP, ethical-mirror, human-review
+
+Task: Lean-business-replanning marathon (>1hr simulated).
+
+## Architecture
