@@ -66,3 +66,6 @@ python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 export META_API_KEY=your_key
 python forge-loop/token_guard.py
+
+Video created with assistance from Manus AI.
+All code, metrics, and terminal outputs shown are from actual runs of ECO-Muse Forge on Meta Model API.
