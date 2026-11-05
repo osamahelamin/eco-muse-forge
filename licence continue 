@@ -1,0 +1,80 @@
+License
+MIT License — see LICENSE file.
+
+Third-Party: Built on Meta Model API. HULLM requires human-in-the-loop for critical decisions.
+
+
+---
+
+### 4. `forge-loop/token_guard.py`
+
+```python
+"""
+ECO-Muse Forge - Eco-Tokens Guard
+Target: $1.25 / $4.25 per 1M tokens
+"""
+
+import json
+import time
+from datetime import datetime
+
+class EcoTokenGuard:
+    def __init__(self, max_in=8000, max_out=2000, budget_per_1m_in=1.25, budget_per_1m_out=4.25):
+        self.max_in = max_in
+        self.max_out = max_out
+        self.budget_in = budget_per_1m_in
+        self.budget_out = budget_per_1m_out
+        self.usage_log = []
+        
+    def count_tokens(self, text):
+        # Simplified token count - replace with tiktoken in production
+        return len(text.split()) * 1.3
+    
+    def enforce_budget(self, prompt, completion=""):
+        in_tokens = self.count_tokens(prompt)
+        out_tokens = self.count_tokens(completion)
+        
+        in_cost = (in_tokens / 1_000_000) * self.budget_in
+        out_cost = (out_tokens / 1_000_000) * self.budget_out
+        
+        log_entry = {
+            "timestamp": datetime.now().isoformat(),
+            "in_tokens": int(in_tokens),
+            "out_tokens": int(out_tokens),
+            "in_cost": round(in_cost, 6),
+            "out_cost": round(out_cost, 6),
+            "total_cost": round(in_cost + out_cost, 6),
+            "within_budget": in_tokens <= self.max_in and out_tokens <= self.max_out
+        }
+        
+        self.usage_log.append(log_entry)
+        
+        # Save for demo
+        with open("token-usage.json", "w") as f:
+            json.dump(self.usage_log, f, indent=2)
+        
+        return log_entry
+    
+    def compare_baseline(self, baseline_tokens):
+        eco_tokens = sum([e["in_tokens"] + e["out_tokens"] for e in self.usage_log])
+        reduction = ((baseline_tokens - eco_tokens) / baseline_tokens) * 100
+        return {
+            "baseline": baseline_tokens,
+            "eco": eco_tokens,
+            "reduction_percent": round(reduction, 1)
+        }
+
+# Demo
+if __name__ == "__main__":
+    guard = EcoTokenGuard()
+    
+    # Simulate baseline vs eco
+    baseline_prompt = "Do lean business replanning " * 500
+    eco_prompt = "Lean replan: " * 50
+    
+    baseline = guard.enforce_budget(baseline_prompt, "result " * 1000)
+    eco = guard.enforce_budget(eco_prompt, "result " * 100)
+    
+    comparison = guard.compare_baseline(45000)
+    print(f"Eco-Tokens Reduction: {comparison['reduction_percent']}%")
+    print(f"Target: $1.25/$4.25 per 1M - Current: ${eco['total_cost']}")
