@@ -41,3 +41,28 @@ We run head-to-head:
 Task: Lean-business-replanning marathon (>1hr simulated).
 
 ## Architecture
+
+
+## Key Features
+
+1. **Eco-Tokens:** Token-budget guard targeting $1.25 / $4.25 per 1M
+2. **Marathon Hand-Off:** Muse Wonder plans, delegates to sub-agents, recovers from errors
+3. **Adaptive SOP:** Workflows that adapt on OBSERVE
+4. **Ethical-Mirror:** Meta Model API Cookbook RAG
+5. **Human-Governed:** Every decision logged for review
+
+## Tech Stack
+
+- **Models:** muse-spark-1.3, muse-wonder, muse-code via Meta Model API
+- **Orchestration:** HULLM-BB-008
+- **Execution:** Task-specific MCP servers (on-demand)
+
+## Quick Start
+
+```bash
+git clone https://github.com/yourname/eco-muse-forge
+cd eco-muse-forge
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+export META_API_KEY=your_key
+python forge-loop/token_guard.py
